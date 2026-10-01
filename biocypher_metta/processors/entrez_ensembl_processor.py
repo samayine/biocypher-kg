@@ -29,9 +29,12 @@ class EntrezEnsemblProcessor(BaseMappingProcessor):
         ncbi_gene_info_url: str = "https://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/Mammalia/Homo_sapiens.gene_info.gz",
         gencode_url: str = "https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_46/gencode.v46.chr_patch_hapl_scaff.annotation.gtf.gz",
         tax_id: str = '9606',
-        cache_dir: str = 'aux_files/hsa/entrez_ensembl',
+        cache_dir: Optional[str] = None,
+        species: str = 'hsa',
         update_interval_hours: int = 168
     ):
+        if cache_dir is None:
+            cache_dir = f'aux_files/{species}/entrez_ensembl'
         self.NCBI_GENE_INFO_URL = ncbi_gene_info_url
         self.GENCODE_URL = gencode_url
         self.tax_id = tax_id

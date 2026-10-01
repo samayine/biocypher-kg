@@ -28,9 +28,12 @@ class HGNCProcessor(BaseMappingProcessor):
 
     def __init__(
         self,
-        cache_dir: str = 'aux_files/hsa/hgnc',
+        cache_dir: Optional[str] = None,
+        species: str = 'hsa',
         update_interval_hours: Optional[int] = 48  # HGNC needs time-based (no remote metadata)
     ):
+        if cache_dir is None:
+            cache_dir = f'aux_files/{species}/hgnc'
         super().__init__(
             name='hgnc',
             cache_dir=cache_dir,

@@ -20,9 +20,12 @@ class EnsemblUniProtProcessor(BaseMappingProcessor):
     def __init__(
         self,
         organism: str = 'HUMAN_9606',
-        cache_dir: str = 'aux_files/hsa/ensembl_uniprot',
+        cache_dir: Optional[str] = None,
+        species: str = 'hsa',
         update_interval_hours: Optional[int] = None
     ):
+        if cache_dir is None:
+            cache_dir = f'aux_files/{species}/ensembl_uniprot'
         self.organism = organism
         self.UNIPROT_IDMAPPING_URL = (
             "https://ftp.uniprot.org/pub/databases/uniprot/current_release/"

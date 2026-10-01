@@ -53,8 +53,10 @@ class _SQLiteConnCache:
 
 class DBSNPProcessor:
 
-    def __init__(self, cache_dir: str = 'aux_files/hsa/sample_dbsnp'):
+    def __init__(self, cache_dir: Optional[str] = None, species: str = 'hsa'):
         self.name = 'dbsnp'
+        if cache_dir is None:
+            cache_dir = f'aux_files/{species}/sample_dbsnp'
         self.cache_dir = Path(cache_dir)
         self.db_file = self.cache_dir / 'dbsnp_mapping.db'
         self.mapping_file = self.cache_dir / 'dbsnp_mapping.pkl'
